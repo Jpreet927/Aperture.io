@@ -13,7 +13,7 @@ setupDirectories();
 
 const app = express();
 app.use(express.json());
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.post("/process-image", async (req, res) => {
     // bucket and filename from cloud pubsub
@@ -34,7 +34,7 @@ app.post("/process-image", async (req, res) => {
     }
 
     const inputFileName = data.name;
-    const outputFileName = `processed-${inputFileName}`;
+    const outputFileName = `processed-${inputFileName}.jpeg`;
 
     await downloadRawImage(inputFileName);
 

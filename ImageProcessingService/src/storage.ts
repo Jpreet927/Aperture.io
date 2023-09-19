@@ -16,23 +16,20 @@ export function setupDirectories() {
 }
 
 // Uses Sharp to compress images
-export function processImage(rawImageName: string, processedImageName: string) {
-    return new Promise<void>((resolve, reject) => {
-        try {
-            sharp(`${localRawImagePath}/${rawImageName}`)
-                .resize(800)
-                .toFormat("jpeg", { mozjpeg: true })
-                .toFile(
-                    `${localProcessedImagePath}/${processedImageName}.jpeg`
-                );
-
-            console.log("Image processed successfully.");
-            resolve();
-        } catch (error) {
-            console.log("Error: image could not be processed");
-            reject(error);
-        }
-    });
+export async function processImage(
+    rawImageName: string,
+    processedImageName: string
+) {
+    await sharp(`${localRawImagePath}/${rawImageName}`)
+        .resize(800)
+        .toFormat("jpeg", { mozjpeg: true })
+        .toFile(`${localProcessedImagePath}/${processedImageName}`)
+        .then((info) => {
+            console.log("Image compressed successfully.");
+        })
+        .catch((err) => {
+            console.log("Error: image could not be compressed.");
+        });
 }
 
 // fetches raw image from gc bucket and saves to local path
@@ -51,9 +48,11 @@ export async function downloadRawImage(fileName: string) {
 export async function uploadProcessedImage(fileName: string) {
     const bucket = storage.bucket(processedBucketName);
 
-    await bucket.upload(`${localProcessedImagePath}/${fileName}`, {
-        destination: fileName,
-    });
+    await storage
+        .bucket(processedBucketName)
+        .upload(`${localProcessedImagePath}/${fileName}`, {
+            destination: fileName,
+        });
 
     console.log(
         `${localProcessedImagePath}/${fileName} uploaded to gs://${processedBucketName}/${fileName}`
