@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
-/ImageProcessingService/node_modules
+/image-processing-service/node_modules
 /.pnp
 .pnp.js
 
