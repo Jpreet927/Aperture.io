@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SignInButton from "./signin";
-import { onAuthStateChangedHelper } from "@/lib/firebase";
+import UploadButton from "./upload";
+import { onAuthStateChangedHelper } from "@/lib/firebase/firebase";
 import { User } from "firebase/auth";
 
 const Navbar = () => {
@@ -25,6 +26,7 @@ const Navbar = () => {
                     <Link href="/home">Home</Link>
                 </li>
             </ul>
+            {user && <UploadButton />}
             <SignInButton user={user} />
         </nav>
     );

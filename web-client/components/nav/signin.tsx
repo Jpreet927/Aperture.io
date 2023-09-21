@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { signInWithGoogle, signOut } from "@/lib/firebase";
+import { signInWithGoogle, signOut } from "@/lib/firebase/firebase";
 import { User } from "firebase/auth";
 
 type props = {
