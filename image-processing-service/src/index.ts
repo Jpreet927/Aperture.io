@@ -8,6 +8,7 @@ import {
     setupDirectories,
     uploadProcessedImage,
 } from "./storage";
+import { isImageNew, setImage } from "./firestore";
 
 setupDirectories();
 
@@ -35,6 +36,17 @@ app.post("/process-image", async (req, res) => {
 
     const inputFileName = data.name;
     const outputFileName = `processed-${inputFileName}.jpeg`;
+    const imageId = inputFileName.split(".")[0];
+
+    if (!isImageNew(imageId)) {
+        return res.status(400).send("Image is already processing");
+    } else {
+        await setImage(imageId, {
+            id: imageId,
+            uid: imageId.split("-")[0],
+            status: "processing",
+        });
+    }
 
     await downloadRawImage(inputFileName);
 
@@ -50,6 +62,11 @@ app.post("/process-image", async (req, res) => {
     }
 
     await uploadProcessedImage(outputFileName);
+
+    await setImage(imageId, {
+        filename: outputFileName,
+        status: "processed",
+    });
 
     await Promise.all([
         deleteRawFile(inputFileName),
