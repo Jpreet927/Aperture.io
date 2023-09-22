@@ -5,5 +5,6 @@ export type Image = {
     status?: "processing" | "processed";
     title?: string;
     description?: string;
+    category?: string;
     date?: Date;
 };

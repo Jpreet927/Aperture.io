@@ -1,8 +1,10 @@
-import { getImages } from "@/lib/firebase/functions";
+import ImagesGrid from "@/components/home/imagesgrid";
 import Image from "next/image";
 
-export default async function Home() {
-    // const images = await getImages();
-
-    return <main className="">Test</main>;
+export default function Home() {
+    return (
+        <main className="">
+            <ImagesGrid />
+        </main>
+    );
 }
