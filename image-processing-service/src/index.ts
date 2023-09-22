@@ -17,7 +17,6 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 app.post("/process-image", async (req, res) => {
-    // bucket and filename from cloud pubsub
     let data;
 
     try {
