@@ -1,10 +1,10 @@
 /* eslint-disable */
 import * as logger from "firebase-functions/logger";
 import * as functions from "firebase-functions";
-import { initializeApp } from "firebase-admin/app";
-import { Firestore } from "firebase-admin/firestore";
-import { Storage } from "@google-cloud/storage";
-import { onCall } from "firebase-functions/v2/https";
+import {initializeApp} from "firebase-admin/app";
+import {Firestore} from "firebase-admin/firestore";
+import {Storage} from "@google-cloud/storage";
+import {onCall} from "firebase-functions/v2/https";
 
 initializeApp();
 
@@ -33,7 +33,7 @@ export const generateUploadURL = onCall(
         if (!request.auth) {
             throw new functions.https.HttpsError(
                 "failed-precondition",
-                "User not authenticated"
+                "User not authenticated",
             );
         }
 
