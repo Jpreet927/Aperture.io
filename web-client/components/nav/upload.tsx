@@ -2,8 +2,12 @@
 
 import { uploadImage } from "@/lib/firebase/functions";
 import React from "react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 const UploadButton = () => {
+    const { toast } = useToast();
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.item(0);
 
@@ -15,6 +19,10 @@ const UploadButton = () => {
     const handleUpload = async (file: File) => {
         try {
             const response = await uploadImage(file);
+            toast({
+                title: "File uploaded successfully!",
+                description: "Thanks for contributing to Aperture.io :)",
+            });
             console.log(`File uploaded successfully`);
         } catch (error) {
             console.log(`Failed to upload file: ${error}`);
@@ -22,8 +30,11 @@ const UploadButton = () => {
     };
 
     return (
-        <div className="flex gap-4 items-center">
-            <label htmlFor="upload" className="flex gap-2">
+        <Button className="flex gap-4 items-center">
+            <label
+                htmlFor="upload"
+                className="flex gap-2 items-center cursor-pointer"
+            >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -52,7 +63,7 @@ const UploadButton = () => {
                 onChange={handleFileChange}
                 className="hidden"
             />
-        </div>
+        </Button>
     );
 };
 

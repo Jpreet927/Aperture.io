@@ -3,6 +3,7 @@
 import React from "react";
 import { signInWithGoogle, signOut } from "@/lib/firebase/firebase";
 import { User } from "firebase/auth";
+import { Button } from "@/components/ui/button";
 
 type props = {
     user: User | null;
@@ -12,9 +13,13 @@ const SignInButton = ({ user }: props) => {
     return (
         <div className="flex gap-4">
             {user ? (
-                <button onClick={signOut}>Sign Out</button>
+                <Button variant="secondary" onClick={signOut}>
+                    Sign Out
+                </Button>
             ) : (
-                <button onClick={signInWithGoogle}>Sign In</button>
+                <Button variant="secondary" onClick={signInWithGoogle}>
+                    Sign In
+                </Button>
             )}
         </div>
     );
