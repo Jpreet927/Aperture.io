@@ -18,7 +18,7 @@ const ImagesGrid = () => {
     }, []);
 
     return (
-        <div className="">
+        <div className="w-full columns-3 gap-4">
             {images &&
                 images.map((img) => (
                     <NextImage
