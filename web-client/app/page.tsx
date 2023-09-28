@@ -1,5 +1,6 @@
 import Hero from "@/components/home/hero";
 import ImagesGrid from "@/components/home/imagesgrid";
+import UploadForm from "@/components/home/uploadform";
 import Image from "next/image";
 
 export default function Home() {
