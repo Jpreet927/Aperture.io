@@ -8,6 +8,10 @@ import {
     User,
 } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore"; 
+import { Image } from "@/ts/types/Image";
+import { FormData } from "@/ts/types/FormData";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -21,7 +25,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const firestore = getFirestore(app);
 export const functions = getFunctions();
 
 // Initialize Auth
@@ -40,4 +44,14 @@ export function onAuthStateChangedHelper(
     callback: (user: User | null) => void
 ) {
     return onAuthStateChanged(auth, callback);
+}
+
+// Firestore functions
+export async function createImageDoc(id: string, data: FormData) {
+    const imagesRef = doc(firestore, 'images', id);
+    setDoc(imagesRef, {
+        title: data.title,
+        description: data.description,
+        category: data.category
+    }, { merge: true });
 }

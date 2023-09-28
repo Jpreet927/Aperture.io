@@ -1,38 +1,13 @@
 "use client";
 
-import { uploadImage } from "@/lib/firebase/functions";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 
 const UploadButton = ({
     setFormVisible,
 }: {
     setFormVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-    const { toast } = useToast();
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.item(0);
-
-        if (file) {
-            handleUpload(file);
-        }
-    };
-
-    const handleUpload = async (file: File) => {
-        try {
-            const response = await uploadImage(file);
-            toast({
-                title: "File uploaded successfully!",
-                description: "Thanks for contributing to Aperture.io :)",
-            });
-            console.log(`File uploaded successfully`);
-        } catch (error) {
-            console.log(`Failed to upload file: ${error}`);
-        }
-    };
-
     return (
         <Button
             className="flex gap-4 items-center"

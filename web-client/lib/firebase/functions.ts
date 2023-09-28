@@ -1,23 +1,27 @@
 import { httpsCallable } from "firebase/functions";
-import { functions } from "./firebase";
+import { createImageDoc, functions } from "./firebase";
 import { Image } from "@/ts/types/Image";
+import { FormData } from "@/ts/types/FormData";
 
 const generateUploadUrl = httpsCallable(functions, "generateUploadURL");
 const getImagesFunction = httpsCallable(functions, "getImages");
 
-export async function uploadImage(file: File) {
+export async function uploadImage(data: FormData) {
     const response: any = await generateUploadUrl({
-        fileExtension: file.name.split(".").pop(),
+        fileExtension: data.file.name.split(".").pop(),
     });
 
-    await fetch(response?.data?.url, {
+    const getSignedURL = fetch(response?.data?.url, {
         method: "PUT",
-        body: file,
+        body: data.file,
         headers: {
-            "Content-Type": file.type,
+            "Content-Type": data.file.type,
         },
     });
+    const uploadToFirestore = createImageDoc(response?.data?.fileName, data);
 
+    await Promise.all([getSignedURL, uploadToFirestore]);
+    
     return;
 }
 
