@@ -9,7 +9,8 @@ import { User } from "firebase/auth";
 import Image from "next/image";
 import logo from "@/assets/branding/logo-black.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import UploadForm from "../home/uploadform";
+import UploadForm from "@/components/home/uploadform";
+import { ThemeToggle } from "@/components/nav/themetoggle";
 
 const Navbar = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -34,7 +35,7 @@ const Navbar = () => {
     return (
         <>
             {formVisible && <UploadForm setFormVisible={setFormVisible} />}
-            <nav className="flex items-center justify-between px-64 py-6 gap-12 bg-gray-50 z-20 sticky">
+            <nav className="flex items-center justify-between px-80 py-6 gap-12 bg-gray-50 dark:bg-background z-20 sticky">
                 <div className="flex justify-start items-center gap-4">
                     <Image
                         src={logo}
@@ -51,7 +52,7 @@ const Navbar = () => {
                         <Link href="/">Search</Link>
                     </li>
                 </ul>
-                <div className="flex justify-end gap-16">
+                <div className="flex justify-end gap-8">
                     <div className="h-[40px] w-[1px] bg-gray-500"></div>
                     {user && <UploadButton setFormVisible={setFormVisible} />}
                     <div className="flex gap-4">
@@ -63,6 +64,7 @@ const Navbar = () => {
                         )}
                         <SignInButton user={user} />
                     </div>
+                    <ThemeToggle />
                 </div>
             </nav>
         </>

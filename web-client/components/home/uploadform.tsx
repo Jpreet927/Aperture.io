@@ -96,8 +96,8 @@ const UploadForm = ({
     };
 
     return (
-        <div className="fixed top-0 left-0 w-screen h-screen bg-white/10 backdrop-blur-lg flex justify-center items-center overflow-hidden overscroll-none">
-            <div className="flex flex-col gap-4 p-12 shadow-2xl w-[450px] rounded-xl bg-white">
+        <div className="fixed top-0 left-0 w-screen h-screen bg-white/10 dark:bg-background/50 backdrop-blur-lg flex justify-center items-center overflow-hidden overscroll-none">
+            <div className="flex flex-col gap-4 p-12 shadow-2xl w-[450px] rounded-xl bg-white dark:bg-background">
                 <div className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Upload an Image</h1>
                     <Button

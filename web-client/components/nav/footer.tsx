@@ -3,11 +3,12 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <div className="xl:px-64 lg:px-32 md:px-16 px-8 py-12 flex justify-between sm:flex-row flex-col gap-6 bg-white border-t border-black/10">
-            <div className="sm:w-[50%] w-full">
-                <h3 className="text-2xl">
-                    <b>© 2023 JAIPREET SINGH</b>
+        <div className="xl:px-80 lg:px-32 md:px-16 px-8 py-12 flex justify-between sm:flex-row flex-col gap-6 bg-white dark:bg-background border-t border-black/10">
+            <div className="sm:w-[50%] w-full flex flex-col gap-1">
+                <h3 className="text-3xl font-bold">
+                    <b>APERTURE.IO</b>
                 </h3>
+                <p>© 2023 JAIPREET SINGH</p>
             </div>
             <div className="flex justify-between sm:w-[50%] w-full">
                 <div className="flex flex-col gap-1.5 sm:w-auto w-[33%]">
@@ -18,58 +19,17 @@ const Footer = () => {
                         Next.js
                     </p>
                     <p className="opacity-75 hover:opacity-100 transition ease-in delay-400">
-                        Tailwind
+                        Express.js
                     </p>
                     <p className="opacity-75 hover:opacity-100 transition ease-in delay-400">
-                        Framer Motion
+                        Node.js
                     </p>
-                </div>
-                <div className="flex flex-col gap-1.5 sm:w-auto w-[33%]">
-                    <p className="mb-4">
-                        <b>Connect</b>
+                    <p className="opacity-75 hover:opacity-100 transition ease-in delay-400">
+                        Google Cloud Platform
                     </p>
-                    <a
-                        className="opacity-75 hover:opacity-100 transition ease-in delay-400"
-                        href="https://twitter.com/Jpreet_"
-                        target="_blank"
-                    >
-                        Twitter
-                    </a>
-                    <a
-                        className="opacity-75 hover:opacity-100 transition ease-in delay-400"
-                        href="https://www.instagram.com/jpreetcreate/"
-                        target="_blank"
-                    >
-                        Instagram
-                    </a>
-                    <a
-                        className="opacity-75 hover:opacity-100 transition ease-in delay-400"
-                        href="https://www.linkedin.com/in/jaipreetsingh/"
-                        target="_blank"
-                    >
-                        LinkedIn
-                    </a>
-                    <a
-                        className="opacity-75 hover:opacity-100 transition ease-in delay-400"
-                        href="https://www.behance.net/jaipreet"
-                        target="_blank"
-                    >
-                        Behance
-                    </a>
-                    <a
-                        className="opacity-75 hover:opacity-100 transition ease-in delay-400"
-                        href="https://github.com/Jpreet927"
-                        target="_blank"
-                    >
-                        Github
-                    </a>
-                    <a
-                        className="opacity-75 hover:opacity-100 transition ease-in delay-400"
-                        href="https://unsplash.com/@jpreet"
-                        target="_blank"
-                    >
-                        Unsplash
-                    </a>
+                    <p className="opacity-75 hover:opacity-100 transition ease-in delay-400">
+                        Tailwind
+                    </p>
                 </div>
                 <div className="flex flex-col gap-1.5 sm:w-auto w-[33%]">
                     <p className="mb-4">
