@@ -3,9 +3,9 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <div className="xl:px-80 lg:px-32 md:px-16 px-8 py-12 flex justify-between sm:flex-row flex-col gap-6 bg-white dark:bg-background border-t border-black/10">
+        <div className="xl:px-80 lg:px-32 md:px-16 px-8 py-12 flex justify-between sm:flex-row flex-col gap-6 bg-white dark:bg-background border-t border-black/10 dark:border-white/10">
             <div className="sm:w-[50%] w-full flex flex-col gap-1">
-                <h3 className="text-3xl font-bold">
+                <h3 className="text-3xl">
                     <b>APERTURE.IO</b>
                 </h3>
                 <p>© 2023 JAIPREET SINGH</p>
