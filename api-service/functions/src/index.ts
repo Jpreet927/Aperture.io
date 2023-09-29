@@ -17,6 +17,7 @@ export const createUser = functions.auth.user().onCreate((user) => {
     const userInfo = {
         uid: user.uid,
         email: user.email,
+        displayName: user.displayName,
         photoUrl: user.photoURL,
     };
 
