@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import { getImages } from "@/lib/firebase/functions";
 import NextImage from "next/image";
 import { Image } from "@/ts/types/Image";
+import ApertureImage from "./image";
 
 const ImagesGrid = () => {
-    const BUCKET = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_BUCKET;
     const [images, setImages] = useState<Image[] | null>(null);
 
     useEffect(() => {
@@ -18,17 +18,8 @@ const ImagesGrid = () => {
     }, []);
 
     return (
-        <div className="w-full columns-3 gap-4">
-            {images &&
-                images.map((img) => (
-                    <NextImage
-                        src={BUCKET! + img.filename}
-                        alt={"Photo of " + img.title!}
-                        priority
-                        width={400}
-                        height={400}
-                    />
-                ))}
+        <div className="w-full columns-3 gap-4 relative">
+            {images && images.map((img) => <ApertureImage image={img} />)}
         </div>
     );
 };
