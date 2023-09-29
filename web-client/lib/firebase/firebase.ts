@@ -8,9 +8,10 @@ import {
     User,
 } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
-import { getFirestore } from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore"; 
+import { getDoc, getFirestore } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { Image } from "@/ts/types/Image";
+import { User as FirebaseUser } from "@/ts/types/User";
 import { FormData } from "@/ts/types/FormData";
 
 // Your web app's Firebase configuration
@@ -48,10 +49,21 @@ export function onAuthStateChangedHelper(
 
 // Firestore functions
 export async function createImageDoc(id: string, data: FormData) {
-    const imagesRef = doc(firestore, 'images', id);
-    setDoc(imagesRef, {
-        title: data.title,
-        description: data.description,
-        category: data.category
-    }, { merge: true });
+    const imagesRef = doc(firestore, "images", id);
+    setDoc(
+        imagesRef,
+        {
+            title: data.title,
+            description: data.description,
+            category: data.category,
+        },
+        { merge: true }
+    );
+}
+
+export async function getUserData(id: string) {
+    const userRef = doc(firestore, "users", id);
+    const docSnap = await getDoc(userRef);
+
+    return docSnap.data() as FirebaseUser;
 }
