@@ -8,7 +8,15 @@ import {
     User,
 } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
-import { getDoc, getFirestore } from "firebase/firestore";
+import {
+    collection,
+    getDoc,
+    getDocs,
+    getFirestore,
+    limit,
+    query,
+    where,
+} from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import { Image } from "@/ts/types/Image";
 import { User as FirebaseUser } from "@/ts/types/User";
@@ -56,14 +64,36 @@ export async function createImageDoc(id: string, data: FormData) {
             title: data.title,
             description: data.description,
             category: data.category,
+            date: Date.now(),
         },
         { merge: true }
     );
 }
 
+// gonna convert these to cloud functions
 export async function getUserData(id: string) {
     const userRef = doc(firestore, "users", id);
     const docSnap = await getDoc(userRef);
 
     return docSnap.data() as FirebaseUser;
+}
+
+export async function getImageData(id: string) {
+    const imageRef = doc(firestore, "images", id);
+    const docSnap = await getDoc(imageRef);
+
+    return docSnap.data() as Image;
+}
+
+export async function getImagesByCategory(category: string) {
+    const imagesRef = collection(firestore, "images");
+    const imagesQuery = query(
+        imagesRef,
+        where("category", "==", category),
+        limit(10)
+    );
+
+    const snapshot = await getDocs(imagesQuery);
+
+    return snapshot.docs.map((doc) => doc.data());
 }
