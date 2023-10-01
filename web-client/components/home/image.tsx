@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import NextImage from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Image } from "@/ts/types/Image";
 import { getUserData } from "@/lib/firebase/firebase";
 import { User } from "@/ts/types/User";
@@ -12,7 +13,6 @@ const ApertureImage = ({ image }: { image: Image }) => {
     const BUCKET = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_BUCKET;
     const [user, setUser] = useState<User | null>(null);
 
-    console.log(user);
     useEffect(() => {
         const unsubscribe = async () => {
             const data = await getUserData(image.uid!);
