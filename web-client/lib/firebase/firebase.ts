@@ -97,3 +97,12 @@ export async function getImagesByCategory(category: string) {
 
     return snapshot.docs.map((doc) => doc.data());
 }
+
+export async function getImagesByUserId(uid: string) {
+    const imagesRef = collection(firestore, "images");
+    const imagesQuery = query(imagesRef, where("uid", "==", uid));
+
+    const snapshot = await getDocs(imagesQuery);
+
+    return snapshot.docs.map((doc) => doc.data());
+}

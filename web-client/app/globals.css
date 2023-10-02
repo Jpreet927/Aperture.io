@@ -14,7 +14,7 @@
         --popover-foreground: 224 71.4% 4.1%;
 
         --primary: 220.9 39.3% 11%;
-        --primary-foreground: 210 20% 98%;
+        --primary-foreground: 210 20% 90%;
 
         --secondary: 220 14.3% 90%;
         --secondary-foreground: 220.9 39.3% 11%;
@@ -46,7 +46,7 @@
         --popover-foreground: 210 0% 98%;
 
         --primary: 210 0% 98%;
-        --primary-foreground: 220.9 0% 11%;
+        --primary-foreground: 220.9 0% 20%;
 
         --secondary: 215 0% 16.9%;
         --secondary-foreground: 210 0% 98%;
@@ -79,4 +79,8 @@ html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+::selection {
+    background: #404040;
 }

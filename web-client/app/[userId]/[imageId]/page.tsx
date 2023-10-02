@@ -13,6 +13,8 @@ import NextImage from "next/image";
 import { convertLowerCaseToPascalCase } from "@/lib/helpers";
 import { CATEGORIES } from "@/ts/constants/category";
 import ImagesGrid from "@/components/home/imagesgrid";
+import UserAvatar from "@/components/image/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const ImagePage = ({
     params,
@@ -47,24 +49,30 @@ const ImagePage = ({
     return (
         <div className="px-80 py-8 gap-8 flex flex-col">
             <div className="flex gap-4 justify-between w-full">
-                <div>
-                    <h1 className="font-bold text-2xl">
-                        {convertLowerCaseToPascalCase(image?.title!)}
-                    </h1>
-                    <p className="text-sm">{image?.description}</p>
-                    <p>{`Category: ${
-                        CATEGORIES[image?.category! as keyof typeof CATEGORIES]
-                    }`}</p>
+                <div className="flex flex-col gap-2">
+                    <div className="flex gap-4 items-center">
+                        <h1 className="font-bold text-3xl">
+                            {convertLowerCaseToPascalCase(image?.title!)}
+                        </h1>
+                        <div className="h-[30px] w-[1px] bg-primary-foreground"></div>
+                        <Badge className="grow-0">{`${
+                            CATEGORIES[
+                                image?.category! as keyof typeof CATEGORIES
+                            ]
+                        }`}</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                        {image?.description}
+                    </p>
                 </div>
                 <div className="flex gap-4">
                     <div className="flex flex-col gap-0 items-end">
-                        <p className="opacity-50 text-sm">Created by</p>
+                        <p className="text-muted-foreground text-sm">
+                            Created by
+                        </p>
                         <p>{user?.displayName || "Anonymous User"}</p>
                     </div>
-                    <Avatar>
-                        <AvatarImage src={user?.photoUrl} />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    <UserAvatar user={user!} dimensions={10} />
                 </div>
             </div>
             <div className="w-[40%] self-center">
@@ -82,8 +90,9 @@ const ImagePage = ({
                     }}
                 />
             </div>
-            <div>
-                <h1 className="text-3xl font-bold">Related Images</h1>
+            <div className="flex flex-col gap-6">
+                <h1 className="text-xl font-bold">Related Images</h1>
+                <div className="w-full bg-primary-foreground h-[1px]"></div>
                 <ImagesGrid images={relatedImages} />
             </div>
         </div>
