@@ -9,8 +9,9 @@ import {
 import { User } from "@/ts/types/User";
 import { Image } from "@/ts/types/Image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import ImagesGrid from "@/components/home/imagesgrid";
+import ImagesGrid from "@/components/home/infinitescrollgrid";
 import UserAvatar from "@/components/image/avatar";
+import UserBanner from "@/components/image/banner";
 
 const UserPage = ({ params }: { params: { userId: string } }) => {
     const [user, setUser] = useState<User>();
@@ -35,19 +36,22 @@ const UserPage = ({ params }: { params: { userId: string } }) => {
     }, []);
 
     return (
-        <div className="px-80 py-16 flex flex-col gap-16 items-center">
-            <div className="flex gap-8 items-center">
-                <UserAvatar user={user!} dimensions={32} />
-                <div>
-                    <h1 className="text-4xl font-bold">
-                        {user?.displayName || "Placeholder"}
-                    </h1>
-                    <p className="text-muted-foreground">
-                        Photographer on Aperture.io
-                    </p>
+        <div className="flex flex-col items-center">
+            <div className="w-full relative">
+                <UserBanner image={images[0]} />
+                <div className="flex w-full h-full justify-center items-center gap-8 absolute top-0 left-0">
+                    <UserAvatar user={user!} dimensions={32} />
+                    <div>
+                        <h1 className="text-4xl font-bold">
+                            {user?.displayName || "Placeholder"}
+                        </h1>
+                        <p className="text-muted-foreground">
+                            Photographer on Aperture.io
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 px-80 py-16">
                 <div className="flex gap-2 items-center">
                     <h1 className="font-bold">{`${user?.displayName}'s Creations`}</h1>
                     <span>•</span>

@@ -14,7 +14,10 @@ import {
     getDocs,
     getFirestore,
     limit,
+    orderBy,
     query,
+    startAfter,
+    startAt,
     where,
 } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
@@ -105,4 +108,35 @@ export async function getImagesByUserId(uid: string) {
     const snapshot = await getDocs(imagesQuery);
 
     return snapshot.docs.map((doc) => doc.data());
+}
+
+let lastDoc: any = null;
+export async function getFirstNImages(n: number) {
+    const imagesRef = collection(firestore, "images");
+    const imagesQuery = query(imagesRef, orderBy("id"), limit(n));
+
+    const snapshot = await getDocs(imagesQuery);
+    lastDoc = snapshot.docs[snapshot.docs.length - 1];
+
+    const data = snapshot.docs.map((doc) => doc.data());
+    console.log(data);
+    return data as Image[];
+}
+
+export async function getImagesPaginated(offset: number, max: number) {
+    // console.log(offset * max);
+    const imagesRef = collection(firestore, "images");
+    const imagesQuery = query(
+        imagesRef,
+        orderBy("id"),
+        startAfter(lastDoc),
+        limit(max)
+    );
+
+    const snapshot = await getDocs(imagesQuery);
+    lastDoc = snapshot.docs[snapshot.docs.length - 1];
+
+    const data = snapshot.docs.map((doc) => doc.data());
+    const lastImage = data.length < max ? true : false;
+    return { data, lastImage };
 }

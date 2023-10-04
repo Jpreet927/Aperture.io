@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { getImages } from "@/lib/firebase/functions";
 import { Image } from "@/ts/types/Image";
-import ApertureImage from "./image";
-import { Skeleton } from "../ui/skeleton";
+import ApertureImage from "@/components/home/image";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const ImagesGrid = ({ images }: { images: Image[] }) => {
+const ImageGrid = ({ images }: { images: Image[] }) => {
     return (
         <>
             {images ? (
@@ -25,4 +25,4 @@ const ImagesGrid = ({ images }: { images: Image[] }) => {
     );
 };
 
-export default ImagesGrid;
+export default ImageGrid;

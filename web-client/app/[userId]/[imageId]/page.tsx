@@ -6,15 +6,14 @@ import {
     getImageData,
     getImagesByCategory,
 } from "@/lib/firebase/firebase";
+import { convertLowerCaseToPascalCase } from "@/lib/helpers";
 import { User } from "@/ts/types/User";
 import { Image } from "@/ts/types/Image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import NextImage from "next/image";
-import { convertLowerCaseToPascalCase } from "@/lib/helpers";
 import { CATEGORIES } from "@/ts/constants/category";
-import ImagesGrid from "@/components/home/imagesgrid";
+import ImagesGrid from "@/components/image/imagegrid";
 import UserAvatar from "@/components/image/avatar";
 import { Badge } from "@/components/ui/badge";
+import NextImage from "next/image";
 
 const ImagePage = ({
     params,

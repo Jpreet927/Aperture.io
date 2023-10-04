@@ -2,28 +2,44 @@
 
 import React, { useState, useEffect } from "react";
 import Hero from "@/components/home/hero";
-import ImagesGrid from "@/components/home/imagesgrid";
+import InfiniteScrollGrid from "@/components/home/infinitescrollgrid";
 import { Image } from "@/ts/types/Image";
-import { getImages } from "@/lib/firebase/functions";
+import { getFirstNImages, getImagesPaginated } from "@/lib/firebase/firebase";
 
 export default function Home() {
     const [images, setImages] = useState<Image[]>([]);
+    let isLastTest = false;
+    const LIMIT = 2;
 
     useEffect(() => {
         const getData = async () => {
-            const response = await getImages();
+            const response = await getFirstNImages(LIMIT);
             setImages(response);
         };
 
         getData();
     }, []);
 
+    const handleInfiniteScroll = async () => {
+        if (isLastTest === true) return;
+
+        const { data, lastImage }: { data: Image[]; lastImage: boolean } =
+            await getImagesPaginated(1, LIMIT);
+
+        isLastTest = lastImage;
+        setImages((prev) => [...prev, ...data]);
+    };
+
     return (
         <main className="">
             <Hero />
             <div className="px-80 py-16 flex flex-col gap-8">
                 <h3 className="text-3xl font-bold">Recent Images</h3>
-                <ImagesGrid images={images} />
+                <InfiniteScrollGrid
+                    images={images}
+                    handleInfiniteScroll={handleInfiniteScroll}
+                    isLast={isLastTest}
+                />
             </div>
         </main>
     );
