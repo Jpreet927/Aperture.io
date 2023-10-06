@@ -11,6 +11,7 @@ import logo from "@/assets/branding/logo-black.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import UploadForm from "@/components/home/uploadform";
 import { ThemeToggle } from "@/components/nav/themetoggle";
+import CategoriesBar from "./categories";
 
 const Navbar = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -67,6 +68,7 @@ const Navbar = () => {
                     <ThemeToggle />
                 </div>
             </nav>
+            <CategoriesBar />
         </>
     );
 };

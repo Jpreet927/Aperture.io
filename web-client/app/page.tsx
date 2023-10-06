@@ -9,16 +9,16 @@ import { getFirstNImages, getImagesPaginated } from "@/lib/firebase/firebase";
 export default function Home() {
     const [images, setImages] = useState<Image[]>([]);
     let isLast = false;
-    const LIMIT = 2;
+    const LIMIT = 3;
 
-    useEffect(() => {
-        const getData = async () => {
-            const response = await getFirstNImages(LIMIT);
-            setImages(response);
-        };
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         const response = await getFirstNImages(LIMIT);
+    //         setImages(response);
+    //     };
 
-        getData();
-    }, []);
+    //     getData();
+    // }, []);
 
     const handleInfiniteScroll = async () => {
         if (isLast) return;

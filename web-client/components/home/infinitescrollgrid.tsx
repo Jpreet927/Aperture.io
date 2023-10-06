@@ -45,26 +45,33 @@ const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
         <>
             {images ? (
                 <>
-                    <div className="w-full min-h-[400px] columns-2 gap-4 relative">
-                        {images &&
-                            images.map((img, index) => {
-                                if (index === images.length - 1) {
-                                    return (
-                                        <ApertureImage
-                                            key={index}
-                                            image={img}
-                                        />
-                                    );
-                                }
-                                return (
+                    <div className="flex gap-4">
+                        <div className="w-[33%] gap-4 relative">
+                            {images
+                                .filter((_, idx) => idx % COLUMNS === 0)
+                                .map((img, index) => (
                                     <ApertureImage key={index} image={img} />
-                                );
-                            })}
+                                ))}
+                        </div>
+                        <div className="w-[33%] gap-4 relative">
+                            {images
+                                .filter((_, idx) => idx % COLUMNS === 1)
+                                .map((img, index) => (
+                                    <ApertureImage key={index} image={img} />
+                                ))}
+                        </div>
+                        <div className="w-[33%] gap-4 relative">
+                            {images
+                                .filter((_, idx) => idx % COLUMNS === 2)
+                                .map((img, index) => (
+                                    <ApertureImage key={index} image={img} />
+                                ))}
+                        </div>
                     </div>
                     <div ref={bottom} />
                 </>
             ) : (
-                <div className="w-full columns-3 gap-4 relative">
+                <div className="w-full columns-1 gap-4 relative">
                     {Array.from(Array(10)).map((_) => (
                         <Skeleton className="w-full h-[600px] mb-4" />
                     ))}
@@ -72,78 +79,6 @@ const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
             )}
         </>
     );
-
-    // return (
-    //     <>
-    //         {images ? (
-    //             <div className="flex gap-4">
-    //                 <div className="w-[33%] gap-4 relative">
-    //                     {images.slice(0, SLICE).map((img, index) => {
-    //                         if (index === images.slice(0, SLICE).length - 1) {
-    //                             console.log("last item in col 1");
-    //                             return (
-    //                                 <ApertureImage
-    //                                     key={index}
-    //                                     image={img}
-    //                                     ref={lastElement}
-    //                                 />
-    //                             );
-    //                         } else {
-    //                             return (
-    //                                 <ApertureImage key={index} image={img} />
-    //                             );
-    //                         }
-    //                     })}
-    //                 </div>
-    //                 <div className="w-[33%] gap-4 relative">
-    //                     {images.slice(SLICE, 2 * SLICE).map((img, index) => {
-    //                         if (
-    //                             index ===
-    //                             images.slice(SLICE, 2 * SLICE).length - 1
-    //                         ) {
-    //                             console.log("last item in col 2");
-    //                             return (
-    //                                 <ApertureImage
-    //                                     key={index}
-    //                                     image={img}
-    //                                     ref={lastElement}
-    //                                 />
-    //                             );
-    //                         } else {
-    //                             return (
-    //                                 <ApertureImage key={index} image={img} />
-    //                             );
-    //                         }
-    //                     })}
-    //                 </div>
-    //                 <div className="w-[33%] gap-4 relative">
-    //                     {images.slice(2 * SLICE).map((img, index) => {
-    //                         if (index === images.slice(2 * SLICE).length - 1) {
-    //                             console.log("last item in col 3");
-    //                             return (
-    //                                 <ApertureImage
-    //                                     key={index}
-    //                                     image={img}
-    //                                     ref={lastElement}
-    //                                 />
-    //                             );
-    //                         } else {
-    //                             return (
-    //                                 <ApertureImage key={index} image={img} />
-    //                             );
-    //                         }
-    //                     })}
-    //                 </div>
-    //             </div>
-    //         ) : (
-    //             <div className="w-full columns-1 gap-4 relative">
-    //                 {Array.from(Array(10)).map((_) => (
-    //                     <Skeleton className="w-full h-[600px] mb-4" />
-    //                 ))}
-    //             </div>
-    //         )}
-    //     </>
-    // );
 };
 
 export default InfiniteScrollGrid;

@@ -14,6 +14,7 @@ import ImagesGrid from "@/components/image/imagegrid";
 import UserAvatar from "@/components/image/avatar";
 import { Badge } from "@/components/ui/badge";
 import NextImage from "next/image";
+import Link from "next/link";
 
 const ImagePage = ({
     params,
@@ -54,11 +55,16 @@ const ImagePage = ({
                             {convertLowerCaseToPascalCase(image?.title!)}
                         </h1>
                         <div className="h-[30px] w-[1px] bg-primary-foreground"></div>
-                        <Badge className="grow-0">{`${
-                            selectToCategory[
-                                image?.category! as keyof typeof selectToCategory
-                            ]
-                        }`}</Badge>
+                        <Link
+                            href={`/categories/${image?.category}`}
+                            target="_blank"
+                        >
+                            <Badge className="grow-0">{`${
+                                selectToCategory[
+                                    image?.category! as keyof typeof selectToCategory
+                                ]
+                            }`}</Badge>
+                        </Link>
                     </div>
                     <p className="text-sm text-muted-foreground">
                         {image?.description}
