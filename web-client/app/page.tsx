@@ -8,7 +8,7 @@ import { getFirstNImages, getImagesPaginated } from "@/lib/firebase/firebase";
 
 export default function Home() {
     const [images, setImages] = useState<Image[]>([]);
-    let isLastTest = false;
+    let isLast = false;
     const LIMIT = 2;
 
     useEffect(() => {
@@ -21,13 +21,15 @@ export default function Home() {
     }, []);
 
     const handleInfiniteScroll = async () => {
-        if (isLastTest === true) return;
+        if (isLast) return;
 
         const { data, lastImage }: { data: Image[]; lastImage: boolean } =
             await getImagesPaginated(1, LIMIT);
 
-        isLastTest = lastImage;
+        isLast = lastImage;
         setImages((prev) => [...prev, ...data]);
+
+        return isLast;
     };
 
     return (
@@ -38,7 +40,7 @@ export default function Home() {
                 <InfiniteScrollGrid
                     images={images}
                     handleInfiniteScroll={handleInfiniteScroll}
-                    isLast={isLastTest}
+                    isLast={isLast}
                 />
             </div>
         </main>

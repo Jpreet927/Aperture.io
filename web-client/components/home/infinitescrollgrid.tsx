@@ -1,41 +1,45 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { getImages } from "@/lib/firebase/functions";
-import { getImagesPaginated } from "@/lib/firebase/firebase";
+import React, { useState, useRef, useCallback } from "react";
 import { Image } from "@/ts/types/Image";
 import ApertureImage from "./image";
 import { Skeleton } from "../ui/skeleton";
 
 type props = {
     images: Image[];
-    handleInfiniteScroll: () => Promise<void>;
+    handleInfiniteScroll: () => Promise<boolean | undefined>;
     isLast: boolean;
 };
 
-const InfiniteScrollGrid = ({
-    images,
-    handleInfiniteScroll,
-    isLast,
-}: props) => {
-    const observer = useRef<IntersectionObserver | null>(null);
+const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
+    const observerRef = useRef<IntersectionObserver | null>(null);
+    const [isLast, setIsLast] = useState(false);
     const COLUMNS = 3;
 
-    const bottom = useCallback((node: any) => {
-        if (isLast === true) return;
-        if (observer.current) observer.current.disconnect();
+    const bottom = useCallback(
+        (node: any) => {
+            if (observerRef.current) {
+                observerRef.current.disconnect();
+            }
 
-        observer.current = new IntersectionObserver(
-            async (entries) => {
-                if (entries[0].isIntersecting && !isLast) {
-                    await handleInfiniteScroll();
-                }
-            },
-            { threshold: 1 }
-        );
+            observerRef.current = new IntersectionObserver(
+                async (entries) => {
+                    if (isLast) return;
+                    console.log(isLast);
+                    if (entries[0].isIntersecting && !isLast) {
+                        const isLastItems = await handleInfiniteScroll();
+                        if (isLastItems === true) {
+                            setIsLast(() => true);
+                        }
+                    }
+                },
+                { threshold: 1 }
+            );
 
-        if (node) observer.current.observe(node);
-    }, []);
+            if (node) observerRef.current.observe(node);
+        },
+        [isLast]
+    );
 
     return (
         <>
