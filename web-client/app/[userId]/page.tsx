@@ -9,7 +9,7 @@ import {
 import { User } from "@/ts/types/User";
 import { Image } from "@/ts/types/Image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import ImagesGrid from "@/components/home/infinitescrollgrid";
+import ImagesGrid from "@/components/image/imagegrid";
 import UserAvatar from "@/components/image/avatar";
 import UserBanner from "@/components/image/banner";
 

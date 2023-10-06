@@ -9,7 +9,7 @@ import {
 import { convertLowerCaseToPascalCase } from "@/lib/helpers";
 import { User } from "@/ts/types/User";
 import { Image } from "@/ts/types/Image";
-import { CATEGORIES } from "@/ts/constants/category";
+import { selectToCategory } from "@/ts/constants/category";
 import ImagesGrid from "@/components/image/imagegrid";
 import UserAvatar from "@/components/image/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -55,8 +55,8 @@ const ImagePage = ({
                         </h1>
                         <div className="h-[30px] w-[1px] bg-primary-foreground"></div>
                         <Badge className="grow-0">{`${
-                            CATEGORIES[
-                                image?.category! as keyof typeof CATEGORIES
+                            selectToCategory[
+                                image?.category! as keyof typeof selectToCategory
                             ]
                         }`}</Badge>
                     </div>

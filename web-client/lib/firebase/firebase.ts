@@ -113,7 +113,7 @@ export async function getImagesByUserId(uid: string) {
 let lastDoc: any = null;
 export async function getFirstNImages(n: number) {
     const imagesRef = collection(firestore, "images");
-    const imagesQuery = query(imagesRef, orderBy("id"), limit(n));
+    const imagesQuery = query(imagesRef, orderBy("date"), limit(n));
 
     const snapshot = await getDocs(imagesQuery);
     lastDoc = snapshot.docs[snapshot.docs.length - 1];
@@ -124,11 +124,10 @@ export async function getFirstNImages(n: number) {
 }
 
 export async function getImagesPaginated(offset: number, max: number) {
-    // console.log(offset * max);
     const imagesRef = collection(firestore, "images");
     const imagesQuery = query(
         imagesRef,
-        orderBy("id"),
+        orderBy("date"),
         startAfter(lastDoc),
         limit(max)
     );
