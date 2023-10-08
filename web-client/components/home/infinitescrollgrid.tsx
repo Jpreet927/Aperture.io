@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { Image } from "@/ts/types/Image";
 import ApertureImage from "./image";
 import { Skeleton } from "../ui/skeleton";
+import { debounce } from "@/lib/helpers";
 
 type props = {
     images: Image[];
@@ -14,7 +15,7 @@ type props = {
 const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
     const observerRef = useRef<IntersectionObserver | null>(null);
     const [isLast, setIsLast] = useState(false);
-    const COLUMNS = 3;
+    const [columns, setColumns] = useState<number>(3);
 
     const bottom = useCallback(
         (node: any) => {
@@ -41,28 +42,44 @@ const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
         [isLast]
     );
 
+    useEffect(() => {
+        const debouncedWindowResize = debounce(function handleWindowResize() {
+            if (window.innerWidth < 768) {
+                console.log("less than 768");
+                setColumns(1);
+            } else {
+                setColumns(3);
+            }
+        }, 500);
+
+        window.addEventListener("resize", debouncedWindowResize);
+
+        return () =>
+            window.removeEventListener("resize", debouncedWindowResize);
+    });
+
     return (
         <>
             {images ? (
                 <>
                     <div className="flex gap-4">
-                        <div className="w-[33%] gap-4 relative">
+                        <div className="md:w-[33%] w-full gap-4 relative">
                             {images
-                                .filter((_, idx) => idx % COLUMNS === 0)
+                                .filter((_, idx) => idx % columns === 0)
                                 .map((img, index) => (
                                     <ApertureImage key={index} image={img} />
                                 ))}
                         </div>
-                        <div className="w-[33%] gap-4 relative">
+                        <div className="w-[33%] md:block hidden gap-4 relative">
                             {images
-                                .filter((_, idx) => idx % COLUMNS === 1)
+                                .filter((_, idx) => idx % columns === 1)
                                 .map((img, index) => (
                                     <ApertureImage key={index} image={img} />
                                 ))}
                         </div>
-                        <div className="w-[33%] gap-4 relative">
+                        <div className="w-[33%] md:block hidden gap-4 relative">
                             {images
-                                .filter((_, idx) => idx % COLUMNS === 2)
+                                .filter((_, idx) => idx % columns === 2)
                                 .map((img, index) => (
                                     <ApertureImage key={index} image={img} />
                                 ))}
