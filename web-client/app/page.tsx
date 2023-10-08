@@ -35,8 +35,9 @@ export default function Home() {
     return (
         <main className="">
             <Hero />
-            <div className="px-80 py-16 flex flex-col gap-8">
+            <div className="xl:px-80 lg:px-48 px-12 py-16 flex flex-col gap-8">
                 <h3 className="text-3xl font-bold">Recent Images</h3>
+                <div className="h-[1px] w-full bg-primary-foreground"></div>
                 <InfiniteScrollGrid
                     images={images}
                     handleInfiniteScroll={handleInfiniteScroll}

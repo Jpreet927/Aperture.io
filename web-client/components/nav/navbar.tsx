@@ -36,7 +36,7 @@ const Navbar = () => {
     return (
         <>
             {formVisible && <UploadForm setFormVisible={setFormVisible} />}
-            <nav className="flex items-center justify-between px-80 py-6 gap-12 bg-gray-50 dark:bg-background z-20 sticky">
+            <nav className="flex items-center justify-between xl:px-80 lg:px-48 px-12 py-6 gap-12 bg-gray-50 dark:bg-background z-20 sticky">
                 <div className="flex justify-start items-center gap-4">
                     <Image
                         src={logo}
@@ -48,9 +48,6 @@ const Navbar = () => {
                 <ul className="flex gap-16 justify-center">
                     <li>
                         <Link href="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link href="/">Search</Link>
                     </li>
                 </ul>
                 <div className="flex justify-end gap-8">

@@ -51,7 +51,7 @@ const UserPage = ({ params }: { params: { userId: string } }) => {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col gap-6 px-80 py-16">
+            <div className="flex flex-col gap-6 xl:px-80 lg:px-48 px-12 py-16">
                 <div className="flex gap-2 items-center">
                     <h1 className="font-bold">{`${user?.displayName}'s Creations`}</h1>
                     <span>•</span>

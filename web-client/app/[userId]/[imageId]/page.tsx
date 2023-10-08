@@ -47,7 +47,7 @@ const ImagePage = ({
     }, []);
 
     return (
-        <div className="px-80 py-8 gap-8 flex flex-col">
+        <div className="xl:px-80 lg:px-48 px-12 py-8 gap-8 flex flex-col">
             <div className="flex gap-4 justify-between w-full">
                 <div className="flex flex-col gap-2">
                     <div className="flex gap-4 items-center">
@@ -80,7 +80,7 @@ const ImagePage = ({
                     <UserAvatar user={user!} dimensions={10} />
                 </div>
             </div>
-            <div className="w-[40%] self-center">
+            <div className="lg:w-[40%] md:w-[50%] w-[75%] self-center">
                 <NextImage
                     src={BUCKET! + image?.filename}
                     alt={"Photo of " + image?.title}

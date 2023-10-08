@@ -22,7 +22,7 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
     }, []);
 
     return (
-        <div className="px-80 pt-8 pb-16 gap-8 flex flex-col">
+        <div className="xl:px-80 lg:px-48 px-12 pt-8 pb-16 gap-8 flex flex-col">
             <div className="flex gap-4 items-center">
                 <h1 className="font-bold text-3xl">
                     {
