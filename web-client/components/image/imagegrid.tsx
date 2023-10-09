@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { getImages } from "@/lib/firebase/functions";
+import React from "react";
 import { Image } from "@/ts/types/Image";
 import ApertureImage from "@/components/home/image";
 import { Skeleton } from "@/components/ui/skeleton";
