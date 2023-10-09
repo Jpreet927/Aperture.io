@@ -7,15 +7,21 @@ import UploadButton from "./upload";
 import { onAuthStateChangedHelper } from "@/lib/firebase/firebase";
 import { User } from "firebase/auth";
 import Image from "next/image";
-import logo from "@/assets/branding/logo-black.png";
+import logoBlack from "@/assets/branding/logo-black.png";
+import logoWhite from "@/assets/branding/logo-white.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import UploadForm from "@/components/home/uploadform";
 import { ThemeToggle } from "@/components/nav/themetoggle";
 import CategoriesBar from "./categories";
+import MobileMenu from "./mobilemenu";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
     const [user, setUser] = useState<User | null>(null);
     const [formVisible, setFormVisible] = useState<boolean>(false);
+    const { theme } = useTheme();
+
+    useEffect(() => console.log(theme));
 
     useEffect(() => {
         const unsubscribe = onAuthStateChangedHelper((user) => {
@@ -39,18 +45,29 @@ const Navbar = () => {
             <nav className="flex items-center justify-between xl:px-80 lg:px-48 px-12 py-6 gap-12 bg-gray-50 dark:bg-background z-20 sticky">
                 <div className="flex justify-start items-center gap-4">
                     <Image
-                        src={logo}
+                        src={logoBlack}
                         alt="Aperture.io Logo"
-                        className="h-[25px] w-auto"
+                        className={`md:h-[25px] h-[20px] w-auto ${
+                            theme === "light" ? "block" : "hidden"
+                        }`}
                     />
-                    <h3 className="text-2xl font-extrabold">APERTURE.IO</h3>
+                    <Image
+                        src={logoWhite}
+                        alt="Aperture.io Logo"
+                        className={`md:h-[25px] h-[20px] w-auto ${
+                            theme === "dark" ? "block" : "hidden"
+                        }`}
+                    />
+                    <h3 className="md:text-2xl text-lg sm:block hidden font-extrabold">
+                        APERTURE.IO
+                    </h3>
                 </div>
                 <ul className="flex gap-16 justify-center">
                     <li>
                         <Link href="/">Home</Link>
                     </li>
                 </ul>
-                <div className="flex justify-end gap-8">
+                <div className="md:flex hidden justify-end gap-8">
                     <div className="h-[40px] w-[1px] bg-gray-500"></div>
                     {user && <UploadButton setFormVisible={setFormVisible} />}
                     <div className="flex gap-4">
@@ -63,6 +80,9 @@ const Navbar = () => {
                         <SignInButton user={user} />
                     </div>
                     <ThemeToggle />
+                </div>
+                <div className="md:hidden block">
+                    <MobileMenu user={user} setFormVisible={setFormVisible} />
                 </div>
             </nav>
             <CategoriesBar />

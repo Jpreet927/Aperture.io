@@ -6,7 +6,7 @@ const CategoriesBar = () => {
     const categories = Object.keys(categoryToSelect);
 
     return (
-        <div className="flex border-y w-full border-border xl:px-80 lg:px-48 px-12">
+        <div className="md:flex hidden border-y w-full border-border xl:px-80 lg:px-48 px-12">
             {categories.map((category, idx) => (
                 <Link
                     href={`/categories/${
