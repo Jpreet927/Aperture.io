@@ -1,10 +1,10 @@
 import React from "react";
-import logo from "@/assets/branding/logo-white.png";
 import Image from "next/image";
+import logo from "@/assets/branding/logo-white.png";
 
 const Hero = () => {
     return (
-        <div className="w-full h-[650px] bg-black text-white flex justify-center items-center bg-hero object-cover bg-center">
+        <div className="w-full h-[650px] bg-black text-white flex justify-center items-center bg-hero bg-cover bg-bottom">
             <div className="lg:w-[30%] md:w-[50%] w-[66%] flex flex-col gap-4">
                 <div className="flex sm:flex-row flex-col sm:items-center items-start gap-4">
                     <Image
