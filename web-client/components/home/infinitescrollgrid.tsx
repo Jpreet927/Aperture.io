@@ -2,9 +2,10 @@
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { Image } from "@/ts/types/Image";
-import ApertureImage from "./image";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { debounce } from "@/lib/helpers";
+import ApertureImage from "./image";
+import Loading from "./loading";
 
 type props = {
     images: Image[];
@@ -14,8 +15,9 @@ type props = {
 
 const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
     const observerRef = useRef<IntersectionObserver | null>(null);
-    const [isLast, setIsLast] = useState(false);
+    const [isLast, setIsLast] = useState<boolean>(false);
     const [columns, setColumns] = useState<number>(3);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const bottom = useCallback(
         (node: any) => {
@@ -26,12 +28,16 @@ const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
             observerRef.current = new IntersectionObserver(
                 async (entries) => {
                     if (isLast) return;
-                    console.log(isLast);
+
                     if (entries[0].isIntersecting && !isLast) {
+                        setIsLoading(() => true);
+
                         const isLastItems = await handleInfiniteScroll();
                         if (isLastItems === true) {
                             setIsLast(() => true);
                         }
+
+                        setIsLoading(() => false);
                     }
                 },
                 { threshold: 1 }
@@ -86,11 +92,12 @@ const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
                         </div>
                     </div>
                     <div ref={bottom} />
+                    {isLoading && <Loading />}
                 </>
             ) : (
                 <div className="w-full columns-1 gap-4 relative">
-                    {Array.from(Array(10)).map((_) => (
-                        <Skeleton className="w-full h-[600px] mb-4" />
+                    {Array.from(Array(10)).map((_, idx) => (
+                        <Skeleton key={idx} className="w-full h-[600px] mb-4" />
                     ))}
                 </div>
             )}
