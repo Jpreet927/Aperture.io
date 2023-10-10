@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import NextImage from "next/image";
+import Link from "next/link";
 import {
     getUserData,
     getImageData,
@@ -13,8 +15,6 @@ import { selectToCategory } from "@/ts/constants/category";
 import ImagesGrid from "@/components/image/imagegrid";
 import UserAvatar from "@/components/image/avatar";
 import { Badge } from "@/components/ui/badge";
-import NextImage from "next/image";
-import Link from "next/link";
 import ImageSkeleton from "@/components/image/imageskeleton";
 
 const ImagePage = ({

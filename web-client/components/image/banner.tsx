@@ -1,6 +1,6 @@
-import { Image } from "@/ts/types/Image";
-import NextImage from "next/image";
 import React from "react";
+import NextImage from "next/image";
+import { Image } from "@/ts/types/Image";
 
 const UserBanner = ({ image }: { image: Image }) => {
     const BUCKET = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_BUCKET;

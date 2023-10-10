@@ -2,19 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import SignInButton from "./signin";
-import UploadButton from "./upload";
-import { onAuthStateChangedHelper } from "@/lib/firebase/firebase";
-import { User } from "firebase/auth";
 import Image from "next/image";
+import { useTheme } from "next-themes";
+import { User } from "firebase/auth";
+import { onAuthStateChangedHelper } from "@/lib/firebase/firebase";
 import logoBlack from "@/assets/branding/logo-black.png";
 import logoWhite from "@/assets/branding/logo-white.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import UploadForm from "@/components/home/uploadform";
 import { ThemeToggle } from "@/components/nav/themetoggle";
+import SignInButton from "./signin";
+import UploadButton from "./upload";
 import CategoriesBar from "./categories";
 import MobileMenu from "./mobilemenu";
-import { useTheme } from "next-themes";
 
 const Navbar = () => {
     const [user, setUser] = useState<User | null>(null);

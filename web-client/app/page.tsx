@@ -1,24 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { getImagesPaginated } from "@/lib/firebase/firebase";
 import Hero from "@/components/home/hero";
 import InfiniteScrollGrid from "@/components/home/infinitescrollgrid";
 import { Image } from "@/ts/types/Image";
-import { getFirstNImages, getImagesPaginated } from "@/lib/firebase/firebase";
 
 export default function Home() {
     const [images, setImages] = useState<Image[]>([]);
     let isLast = false;
-    const LIMIT = 3;
-
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         const response = await getFirstNImages(LIMIT);
-    //         setImages(response);
-    //     };
-
-    //     getData();
-    // }, []);
+    const LIMIT = 10;
 
     const handleInfiniteScroll = async () => {
         if (isLast) return;

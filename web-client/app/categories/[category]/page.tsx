@@ -5,17 +5,14 @@ import { getImagesByCategory } from "@/lib/firebase/firebase";
 import { Image } from "@/ts/types/Image";
 import { selectToCategory } from "@/ts/constants/category";
 import ImageGrid from "@/components/image/imagegrid";
-import { convertLowerCaseToPascalCase } from "@/lib/helpers";
 
 const CategoryPage = ({ params }: { params: { category: string } }) => {
     const [images, setImages] = useState<Image[]>([]);
-    const BUCKET = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_BUCKET;
 
     useEffect(() => {
         const unsubscribe = async () => {
             const data = await getImagesByCategory(params.category);
             setImages(data);
-            console.log(data);
         };
 
         unsubscribe();

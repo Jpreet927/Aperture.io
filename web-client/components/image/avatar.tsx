@@ -1,7 +1,7 @@
-import { User } from "@/ts/types/User";
 import React from "react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Link from "next/link";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { User } from "@/ts/types/User";
 
 const UserAvatar = ({
     user,

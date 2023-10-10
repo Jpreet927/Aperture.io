@@ -1,14 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-    getUserData,
-    getImageData,
-    getImagesByUserId,
-} from "@/lib/firebase/firebase";
+import { getUserData, getImagesByUserId } from "@/lib/firebase/firebase";
 import { User } from "@/ts/types/User";
 import { Image } from "@/ts/types/Image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ImagesGrid from "@/components/image/imagegrid";
 import UserAvatar from "@/components/image/avatar";
 import UserBanner from "@/components/image/banner";
@@ -17,7 +12,6 @@ import UserSkeleton from "@/components/image/userskeleton";
 const UserPage = ({ params }: { params: { userId: string } }) => {
     const [user, setUser] = useState<User>();
     const [images, setImages] = useState<Image[]>([]);
-    const BUCKET = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_BUCKET;
 
     useEffect(() => {
         const unsubscribe = async () => {
