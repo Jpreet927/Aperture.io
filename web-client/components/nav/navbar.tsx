@@ -21,8 +21,6 @@ const Navbar = () => {
     const [formVisible, setFormVisible] = useState<boolean>(false);
     const { theme } = useTheme();
 
-    useEffect(() => console.log(theme));
-
     useEffect(() => {
         const unsubscribe = onAuthStateChangedHelper((user) => {
             setUser(user);

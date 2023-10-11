@@ -29,6 +29,7 @@ COPY package*.json ./
 RUN npm install --only=production
 
 # Copy built app from the builder stage
+COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 

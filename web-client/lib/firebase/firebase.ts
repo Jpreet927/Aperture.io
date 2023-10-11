@@ -93,6 +93,7 @@ export async function getImagesByCategory(category: string) {
     const imagesQuery = query(
         imagesRef,
         where("category", "==", category),
+        orderBy("date", "desc"),
         limit(10)
     );
 
@@ -103,7 +104,11 @@ export async function getImagesByCategory(category: string) {
 
 export async function getImagesByUserId(uid: string) {
     const imagesRef = collection(firestore, "images");
-    const imagesQuery = query(imagesRef, where("uid", "==", uid));
+    const imagesQuery = query(
+        imagesRef,
+        where("uid", "==", uid),
+        orderBy("date", "desc")
+    );
 
     const snapshot = await getDocs(imagesQuery);
 
@@ -119,7 +124,6 @@ export async function getFirstNImages(n: number) {
     lastDoc = snapshot.docs[snapshot.docs.length - 1];
 
     const data = snapshot.docs.map((doc) => doc.data());
-    console.log(data);
     return data as Image[];
 }
 

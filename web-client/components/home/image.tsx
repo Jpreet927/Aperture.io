@@ -59,4 +59,6 @@ const ApertureImage = React.forwardRef(
     }
 );
 
+ApertureImage.displayName = "ApertureImage";
+
 export default ApertureImage;

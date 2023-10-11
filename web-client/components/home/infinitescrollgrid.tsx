@@ -51,7 +51,6 @@ const InfiniteScrollGrid = ({ images, handleInfiniteScroll }: props) => {
     useEffect(() => {
         const debouncedWindowResize = debounce(function handleWindowResize() {
             if (window.innerWidth < 768) {
-                console.log("less than 768");
                 setColumns(1);
             } else {
                 setColumns(3);

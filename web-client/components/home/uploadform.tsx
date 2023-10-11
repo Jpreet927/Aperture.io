@@ -40,7 +40,7 @@ const formSchema = z.object({
     description: z
         .string()
         .min(1, { message: "Description cannot be blank." })
-        .max(50, { message: "Description is too long." }),
+        .max(100, { message: "Description is too long." }),
     category: z.string().min(1, { message: "Please choose a category." }),
     file: z.any(),
 });
