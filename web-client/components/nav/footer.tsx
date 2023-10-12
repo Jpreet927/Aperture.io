@@ -50,25 +50,25 @@ const Footer = () => {
                         <div className="flex gap-16">
                             <div className="flex flex-col gap-1.5">
                                 <Link
-                                    href="/"
+                                    href="/categories/architecture"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     Architecture
                                 </Link>
                                 <Link
-                                    href="/portfolio/development"
+                                    href="/categories/currentevents"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     Current Events
                                 </Link>
                                 <Link
-                                    href="/portfolio/design"
+                                    href="/categories/experimental"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     Experimental
                                 </Link>
                                 <Link
-                                    href="/portfolio/photography"
+                                    href="/categories/fashion"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     Fashion
@@ -76,25 +76,25 @@ const Footer = () => {
                             </div>
                             <div className="flex flex-col gap-1.5">
                                 <Link
-                                    href="/about"
+                                    href="/categories/nature"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     Nature
                                 </Link>
                                 <Link
-                                    href="/about"
+                                    href="/categories/people"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     People
                                 </Link>
                                 <Link
-                                    href="/portfolio/photography"
+                                    href="/categories/sports"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     Sports
                                 </Link>
                                 <Link
-                                    href="/about"
+                                    href="/categories/street"
                                     className="opacity-75 hover:opacity-100 transition ease-in delay-400"
                                 >
                                     Street

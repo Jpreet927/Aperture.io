@@ -14,7 +14,7 @@ const UserAvatar = ({
         <Link href={`/${user?.uid!}`}>
             <Avatar className={`h-${dimensions} w-${dimensions}`}>
                 <AvatarImage src={user?.photoUrl} />
-                <AvatarFallback>IO</AvatarFallback>
+                <AvatarFallback className="w-full h-full">IO</AvatarFallback>
             </Avatar>
         </Link>
     );

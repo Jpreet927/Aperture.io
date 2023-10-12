@@ -48,7 +48,7 @@ const ImagePage = ({
     }, []);
 
     return (
-        <div className="xl:px-80 lg:px-48 px-12 py-8 gap-8 flex flex-col">
+        <div className="xl:px-80 lg:px-48 px-12 pt-8 pb-24 gap-8 flex flex-col min-h-screen">
             {image ? (
                 <>
                     <div className="flex gap-4 justify-between w-full">
